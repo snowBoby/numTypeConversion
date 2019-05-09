@@ -1,5 +1,6 @@
 # numTypeConversion
 数值类型转换
+强制转换：强制转换主要指使用Number、String和Boolean三个函数，手动将各种类型的值，分布转换成数字、字符串或者布尔值。
 
 一、数值转换：有3个函数可以把非数值转换为数值：Number()、parseInt()、parseFloat()，Number()可以转换任何数据类型，parseInt()和parseFloat()专门用于字符转转化成数值。Number()和parseInt()都可以转化十六进制，parseFloat()只能转换十进制数，所以无第二个参数，parseInt()有第二个参数。
 
@@ -50,5 +51,16 @@
      Object      任何对象          null
      Undefined    无             undefined
   
-  
-1、强制转换：强制转换主要指使用Number、String和Boolean三个函数，手动将各种类型的值，分布转换成数字、字符串或者布尔值。
+三、String() 函数的转换规则:
+    如果值有toString()方法，则调用该方法并返回相应的结果。
+    如果值是null，则返回"null"
+    如果值是undefined，则返回"undefined"
+    
+    注意：除了null和undefined，都有toString()方法，toString()可以传递一个参数：输出数值的基数。输出几进制格式的字符串
+    var num = 10;
+    num.toString()   //"10"
+    num.toString(2)   //"1010"
+    num.toString(8)   //"12"
+    num.toString(10)   //"10"
+    num.toString(16)   //"a"
+    

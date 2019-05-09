@@ -16,7 +16,7 @@
     如果字符串中包含除上述格式之外的字符，则将其转换为 NaN。
   如果是对象，遵循下列规则：
     第一步，调用对象自身的valueOf方法。如果返回原始类型的值，则直接对该值使用Number函数，不再进行后续步骤。
-    第二步，如果valueOf方法返回的还是对象，则改为调用对象自身的toString方法。如果toString方法返回原始类型的值，则对该值使用Number函数，不再进行后     续步骤
+    第二步，如果valueOf方法返回的还是对象，则改为调用对象自身的toString方法。如果toString方法返回原始类型的值，则对该值使用Number函数，不再进行后     续步骤，否则返回NaN。
     
     Number({a: 1}) // NaN
     Number([1, 2, 3]) // NaN
@@ -25,20 +25,30 @@
 2、parseInt()函数的转换规则:
   更多的是看其是否符合数值模式。它会忽略字符串前面的空格，直至找到第一个非空格字符。如果第一个字符不是数字字符或者负号，parseInt() 函数就会返回 NaN；
   
-  parseInt("1234blue") //1234
-  parseInt("")         //NaN
-  parseInt("0xA")      //10(十六进制数)
-  parseInt("070")      //70(十进制数)
-  parseInt("22.5")     //22
-  parseInt("0xAF",16)  //175(按十六进制进行解析)
-  parseInt("AF",16)    //175(按十六进制进行解析)
-  parseInt("AF")       //NaN
-  parseInt("10",2)     //2(按二进制进行解析)
-  parseInt("10",8)     //8(按八进制进行解析)
-  parseInt("10",10)    //10(按十进制进行解析)
-  parseInt("10",16)    //16(按十六进制进行解析)
+    parseInt("1234blue") //1234
+    parseInt("")         //NaN
+    parseInt("0xA")      //10(十六进制数)
+    parseInt("070")      //70(十进制数)
+    parseInt("22.5")     //22
+    parseInt("0xAF",16)  //175(按十六进制进行解析)
+    parseInt("AF",16)    //175(按十六进制进行解析)
+    parseInt("AF")       //NaN
+    parseInt("10",2)     //2(按二进制进行解析)
+    parseInt("10",8)     //8(按八进制进行解析)
+    parseInt("10",10)    //10(按十进制进行解析)
+    parseInt("10",16)    //16(按十六进制进行解析)
   
 3、parseFloat()函数的转换规则:
   与parseInt()规则类似，但是不能转化十六进制数，只解析十进制数，因此没有第二个参数。
+  
+二、Boolean() 函数的转换规则:
+
+     数据类型    转换为true的值   转换为false的值
+     Boolean     true            false
+     String      非空字符          空字符
+     Number      非0数字          0和NaN
+     Object      任何对象          null
+     Undefined    无             undefined
+  
   
 1、强制转换：强制转换主要指使用Number、String和Boolean三个函数，手动将各种类型的值，分布转换成数字、字符串或者布尔值。

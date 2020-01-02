@@ -1,9 +1,10 @@
 # numTypeConversion
 数值类型转换，包含ｊｓ数据类型、强制转换和隐式类型转换。
-## 一.ｊｓ数据类型
+## 一.ｊｓ内置类型
 js中有7种内置类型（数据类型），可以分为两类：原始（基本）类型、引用类型。  　　
-* 基础类型(原始值)：`undefined、 null、 string、 number、 boolean、 symbol (es6新出的，本文不讨论这种类型)`
-* 引用类型(对象值)： `object（Date, Array, String, Number, Boolean, RegExp, Math, Function，JSON）`
+* 基础类型(原始值)：`undefined、 null、 string、 number、 boolean、 symbol (es6新出的，本文不讨论这种类型)`-》typeof判断数据类型
+* 引用类型(对象值)： `object（子类型：String, Number, Boolean, Date, Array, RegExp, Math, Function，JSON）`-》instanceof判断数据类型  
+`注意：null是基本类型中唯一的一个“假值”类型，(!a && typeof a === "object") //用它来判断null值`
 
 ## 二.强制转换
 &nbsp;&nbsp;&nbsp;&nbsp;强制转换主要指使用Number、String和Boolean三个函数，手动将各种类型的值，分布转换成数值、字符串或者布尔值。 

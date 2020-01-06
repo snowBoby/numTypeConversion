@@ -6,10 +6,13 @@ js中有7种内置类型（数据类型），可以分为两类：原始（基�
 * 引用类型(对象值)： `object（子类型：String, Number, Boolean, Date, Array, RegExp, Math, Function，JSON）`-》instanceof判断数据类型  
 `注意：null是基本类型中唯一的一个“假值”类型，(!a && typeof a === "object") //用它来判断null值`  
       &nbsp;&nbsp;`typeof function a(){} === "function" 但是function不是内置类型，只是object一个子类型`
+### 1.1 数组
+* 数组：数组通过数字进行索引，但是数组也是对象，所以也可以包含字符串键值和属性（但这些并不计算在数组长度内），除非字符串键值能够被强制类型转换为十进制数字的话，它就会被当作数字索引来处理。
+* 类数组：
 
 ## 二.强制转换
 &nbsp;&nbsp;&nbsp;&nbsp;强制转换主要指使用Number、String和Boolean三个函数，手动将各种类型的值，分布转换成数值、字符串或者布尔值。 
-### 1.1 数值转换
+### 2.1 数值转换
 &nbsp;&nbsp;&nbsp;&nbsp;有3个函数可以把非数值转换为数值：Number()、parseInt()、parseFloat()，Number()可以转换任何数据类型，parseInt()和parseFloat()专门用于字符串转化成数值。Number()和parseInt()都可以转化十六进制，parseFloat()只能转换十进制数，所以无第二个参数，parseInt()有第二个参数。  
 
 #### Number() 函数的转换规则:  
@@ -58,7 +61,7 @@ js中有7种内置类型（数据类型），可以分为两类：原始（基�
 
 &nbsp;&nbsp;&nbsp;&nbsp;与parseInt()规则类似，但是不能转化十六进制数，只解析十进制数，因此没有第二个参数。
   
-### 1.2布尔值转换
+### 2.2布尔值转换
 #### Boolean() 函数的转换规则:
 
      数据类型    转换为true的值   转换为false的值
@@ -67,7 +70,7 @@ js中有7种内置类型（数据类型），可以分为两类：原始（基�
      Number      非0数字          0和NaN
      Object      任何对象          null
      Undefined    无             undefined
-### 1.3 字符串强制转换
+### 2.3 字符串强制转换
 
 #### String() 函数的转换规则:  
 *     如果值有toString()方法，则调用该方法并返回相应的结果。  

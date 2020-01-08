@@ -8,7 +8,59 @@ js中有7种内置类型（数据类型），可以分为两类：原始（基�
       &nbsp;&nbsp;`typeof function a(){} === "function" 但是function不是内置类型，只是object一个子类型`
 ### 1.1 数组
 * 数组：数组通过数字进行索引，但是数组也是对象，所以也可以包含字符串键值和属性（但这些并不计算在数组长度内），除非字符串键值能够被强制类型转换为十进制数字的话，它就会被当作数字索引来处理。
-* 类数组：
+* 类数组：包括 DOM查询操作返回的DOM元素列表、arguments、字符串
+
+| 操作 | 语法 |
+| --- | --- |
+| 类数组转换成数组 | 1、var arr = Array.prototype.slice.call( arguments );   2、Array.from(arguments)|
+| 字符串转换成数组 | 1、"foo".split('').reverse().join('') |
+   
+### 1.2 字符串
+* JavaScript中字符串是不可变的，而数组是可变的。字符串不可变是指字符串的成员函数不会改变其原始值，而是创建并返回一个新的字符串。而数组的成员函数都是在其原始值上进行操作。例子如下
+* 可以用数组函数来处理字符串很方便。但是对于操作数组原始值的成员函数，字符串不能“借用”该数组成员函数（eg：reverse() ），因为字符串是不可变的。例子如下
+```
+var a = "foo"; 
+var b = ["f","o","o"];
+
+a[1] = "O"; //a[1]在JavaScript中并非总是合法语法，在老版本的IE中就不被允许（现在可以了）。正确的方法应该是a.charAt(1)。
+b[1] = "O"; 
+
+a; // "foo" 
+b; // ["f","O","o"]
+
+//字符串不可变，数组可变，体现在如下：
+c = a.toUpperCase(); 
+a === c;    // false 
+a;          // "foo" 
+c;          // "FOO" 
+
+b.push( "!" ); 
+b;          // ["f","O","o","!"]
+
+//可以通过“借用”数组的非变更方法来处理字符串
+a.join;         // undefined 
+a.map;          // undefined 
+
+var c = Array.prototype.join.call( a, "-" ); 
+var d = Array.prototype.map.call( a, function(v){     return v.toUpperCase() + "."; } ).join( "" ); 
+
+c;              // "f-o-o" 
+d;              // "F.O.O."
+
+//修改原始值的数组成员函数，字符串不能“借用”
+a.reverse;      // undefined 
+b.reverse();    // ["!","o","O","f"] 
+b;              // ["f","O","o","!"]
+Array.prototype.reverse.call( a ); //报错
+
+*注意：如果需要经常以字符数组的方式来处理字符串的话，倒不如直接使用数组。这样就不用在字符串和数组之间来回折腾。可以在需要时使用join("")将字符数组转换为字符串
+```
+### 1.3 数值
+| Number类型成员函数 | 描述 | 例子针对var a = 42.59; |
+| --- | --- | --- |
+| toFixed( 位数 ) | 指定小数保留几位数 | a.toFixed( 0 ); // "43" |
+| toExponential() | 转换成指数形式 | a.toExponential() //"4.259e+1" |
+| toPrecision(位数) | 指定有效数位的显示位数 |a.toPrecision( 1 ); // "4e+1"  a.toPrecision( 3 ); // "42.6" |
 
 ## 二.强制转换
 &nbsp;&nbsp;&nbsp;&nbsp;强制转换主要指使用Number、String和Boolean三个函数，手动将各种类型的值，分布转换成数值、字符串或者布尔值。 

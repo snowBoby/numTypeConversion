@@ -3,7 +3,9 @@
 ## 一.ｊｓ内置类型
 js中有7种内置类型（数据类型），可以分为两类：**原始（基本）类型和引用类型：** 　　
 * 基础类型(原始值)：`undefined、 null、 string、 number、 boolean、 symbol (es6新出的，本文不讨论这种类型)`-》typeof判断数据类型
-* 引用类型(对象值)： `object（子类型：String, Number, Boolean, Date, Array, RegExp, Math, Function，JSON）`-》instanceof判断数据类型  
+* 引用类型(对象值)： `object（子类型：String, Number, Boolean, Date, Array, RegExp, Math, Function，JSON）`-》instanceof判断数据类型 
+
+
 **typeof注意事项：**
 * JS中的变量是没有类型的，只有值才有类型。所以对变量执行typeof操作时，得到的结果并不是该变量的类型，而是该变量持有值的类型。
 * typeof null === "object"，null是基本类型中唯一的一个“假值”类型，(!a && typeof a === "object") //用它来判断null值
@@ -12,16 +14,17 @@ js中有7种内置类型（数据类型），可以分为两类：**原始（基
 
 ### 1.1 数组
 * 数组：数组通过数字进行索引，但是数组也是对象，所以也可以包含字符串键值和属性（但这些并不计算在数组长度内），除非字符串键值能够被强制类型转换为十进制数字的话，它就会被当作数字索引来处理。
-* 类数组：包括 DOM查询操作返回的DOM元素列表、arguments、字符串
+* 类数组：包括 DOM查询操作返回的DOM元素列表、arguments
 
 | 操作 | 语法 |
 | --- | --- |
 | 类数组转换成数组 | 1、var arr = Array.prototype.slice.call( arguments );   2、Array.from(arguments)|
-| 字符串转换成数组 | 1、"foo".split('').reverse().join('') |
+| 字符串转换成数组 | 1、"foo".split('').reverse().join('')对于包含复杂字符(Unicode，如星号、多字节字符)的字符串并不适用，这时则需要功能更加完备、能够处理Unicode的工具库，可参考Esrever |
    
 ### 1.2 字符串
+* 字符串和数组的确很相似，他们都是类数组，都有length属性以及indexOf(..)和concat(..)方法。
 * JavaScript中字符串是不可变的，而数组是可变的。字符串不可变是指字符串的成员函数不会改变其原始值，而是创建并返回一个新的字符串。而数组的成员函数都是在其原始值上进行操作。例子如下
-* 可以用数组函数来处理字符串很方便。但是对于操作数组原始值的成员函数，字符串不能“借用”该数组成员函数（eg：reverse() ），因为字符串是不可变的。例子如下
+* 许多数组函数来处理字符串很方便。虽然字符串没有这些函数，但是可以通过“借用”数组（Array.prototype.xxx.call）的非变更方法(操作数组原始值的成员函数eg：reverse() )来处理字符串。例子如下
 ```
 var a = "foo"; 
 var b = ["f","o","o"];
@@ -55,11 +58,12 @@ d;              // "F.O.O."
 a.reverse;      // undefined 
 b.reverse();    // ["!","o","O","f"] 
 b;              // ["f","O","o","!"]
-Array.prototype.reverse.call( a ); //报错
+Array.prototype.reverse.call( a ); //报错，我们无法“借用”数组的可变更成员函数，因为字符串是不可变的。
 
 *注意：如果需要经常以字符数组的方式来处理字符串的话，倒不如直接使用数组。这样就不用在字符串和数组之间来回折腾。可以在需要时使用join("")将字符数组转换为字符串
 ```
-### 1.3 数值
+### 1.3 数字
+Js适用的是“双精度”格式（即64位二进制）。
 | Number类型成员函数 | 描述 | 例子针对var a = 42.59; |
 | --- | --- | --- |
 | toFixed( 位数 ) | 指定小数保留几位数 | a.toFixed( 0 ); // "43" |

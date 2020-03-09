@@ -1,11 +1,15 @@
 # numTypeConversion
 数值类型转换，包含ｊｓ数据类型、强制转换和隐式类型转换。
 ## 一.ｊｓ内置类型
-js中有7种内置类型（数据类型），可以分为两类：原始（基本）类型、引用类型。  　　
+js中有7种内置类型（数据类型），可以分为两类：**原始（基本）类型和引用类型：** 　　
 * 基础类型(原始值)：`undefined、 null、 string、 number、 boolean、 symbol (es6新出的，本文不讨论这种类型)`-》typeof判断数据类型
 * 引用类型(对象值)： `object（子类型：String, Number, Boolean, Date, Array, RegExp, Math, Function，JSON）`-》instanceof判断数据类型  
-`注意：null是基本类型中唯一的一个“假值”类型，(!a && typeof a === "object") //用它来判断null值`  
-      &nbsp;&nbsp;`typeof function a(){} === "function" 但是function不是内置类型，只是object一个子类型`
+**typeof注意事项：**
+* JS中的变量是没有类型的，只有值才有类型。所以对变量执行typeof操作时，得到的结果并不是该变量的类型，而是该变量持有值的类型。
+* typeof null === "object"，null是基本类型中唯一的一个“假值”类型，(!a && typeof a === "object") //用它来判断null值
+* typeof function a(){} === "function" 但是function不是内置类型，只是object一个子类型
+* typeof Undeclared/Undefined === 'undefined' (undefined是值的一种，undeclared则表示变量还没有被声明过)，变量有没有被声明，都没有报错，这是因为typeof有一个特殊的安全防范机制(全局对象也可以用window.__也是安全防范机制)。
+
 ### 1.1 数组
 * 数组：数组通过数字进行索引，但是数组也是对象，所以也可以包含字符串键值和属性（但这些并不计算在数组长度内），除非字符串键值能够被强制类型转换为十进制数字的话，它就会被当作数字索引来处理。
 * 类数组：包括 DOM查询操作返回的DOM元素列表、arguments、字符串
